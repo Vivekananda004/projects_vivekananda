@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITHA Vivekananda - Portfolio</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%236cb2eb%22>V</text></svg>">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Devicons for programming languages -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #2c3e50;
+            --icon-color: #6cb2eb;
+            --light-bg: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light-bg);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0 80px;
+        }
+        
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            width: 300px;
+            border-radius: 50%;
+            /* border:  solid var(--icon-color); */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .nav-link {
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .skill-card, .project-card, .experience-card {
+            border-left: 3px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            height: 100%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .skill-card:hover, .project-card:hover, .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 2px solid white;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 8px;
+            transition: all 0.3s;
+            color: var(--icon-color);
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px) scale(1.1);
+            color: white;
+        }
+
+        /* Optimized image styles */
+        .optimized-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            color: var(--icon-color);
+        }
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            color: #FFF;
+        }
+        
+        /* Skill icons */
+        .skill-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+            vertical-align: middle;
+            color: var(--icon-color);
+        }
+        
+        /* Address section */
+        .address-card {
+            border-left: 3px solid var(--primary-color);
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .address-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Contact icons */
+        .contact-icon {
+            color: var(--icon-color);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0 40px;
+                text-align: center;
+            }
+            
+            .profile-img {
+                width: 200px;
+                margin-bottom: 20px;
+            }
+            
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 24px;
+            }
+        }
+        
+        /* Animation classes */
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        
+        .animate-slide-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s forwards;
+        }
+        
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideLeft 1s forwards;
+        }
+        
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideRight 1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideLeft {
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideRight {
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Delay classes */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919494099040" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-2 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ITHA Vivekananda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2 animate-slide-left">
+                    <h1 class="display-5 fw-bold mb-3">ITHA Vivekananda</h1>
+                    <p class="lead mb-3">Java Developer | Web Developer</p>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <a href="mailto:vikkyitha143@gmail.com" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-envelope me-1" style="color: var(--icon-color);"></i> vikkyitha143@gmail.com
+                        </a>
+                        <a href="tel:+919032885600" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-phone me-1" style="color: var(--icon-color);"></i> +91 9032885600
+                        </a>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="#projects" class="btn btn-primary px-3">View My Work</a>
+                        <a href="#contact" class="btn btn-outline-primary px-3">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0 text-center animate-slide-right">
+                    <img src="/images/vivekananda image.jpg" alt="ITHA Vivekananda" class="profile-img optimized-img" height="100px" width="100px">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Education & Certifications</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow-sm h-100 animate-slide-up">
+                        <div class="card-body">
+                            <h4 class="card-title h5">Malla Reddy College of Engineering and Technology</h4>
+                            <h6 class="card-subtitle mb-2 text-muted small">B.Tech in Information Technology</h6>
+                            <p class="card-text small">2021-2025 | Hyderabad, India</p>
+                            <p class="card-text small"><strong>CGPA:</strong> 7.12 / 10</p>
+                            
+                            <h5 class="h6 mt-4">Secondary Education</h5>
+                            <ul class="list-unstyled small">
+                                <li>
+                                    <strong>Intermediate (MPC)</strong><br>
+                                    Gurukrupa Junior College, Siddipet<br>
+                                    Telangana State Board of Intermediate Education<br>
+                                    2019-2021 | 598 Marks
+                                </li>
+                                <li class="mt-2">
+                                    <strong>10th Class</strong><br>
+                                    Meridian High School, Siddipet<br>
+                                    Secondary Board of Education Telangana<br>
+                                    2018-2019 | 9.0 CGPA
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow-sm h-100 animate-slide-up delay-1">
+                        <div class="card-body">
+                            <h4 class="card-title h5">Certifications</h4>
+                            <ul class="list-unstyled small">
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    Salesforce Virtual Internship (8 weeks) - Developer Completion
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    Accenture Innovation Challenge 2023
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    Cisco CCNAv7: Introduction to Network
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    Cambridge English Empower level B2
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    AWS: Introduction to Machine Learning
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    GREAT APPSEC HACKATHON 2024 (Round 1)
+                                </li>
+                                <li class="mb-1">
+                                    <i class="fas fa-certificate me-1" style="color: var(--icon-color);"></i>
+                                    Be10x AI Tools & ChatGPT Workshop
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="mt-4 mb-3 h5 animate-fade-in">Co-Curricular Activities</h3>
+            <div class="timeline small animate-slide-up delay-2">
+                <div class="timeline-item">
+                    <h5 class="h6">Smart India Hackathon, Internal Hackathon Winner</h5>
+                    <p class="text-muted mb-1">Jan 2023 – Feb 2023 | Hyderabad, India</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="h6">Tech-Fest Coordinator, College Level Fest</h5>
+                    <p class="text-muted mb-1">Jan 2024 – Jan 2024 | Hyderabad, India</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="h6">Participated in 24 hours Codeathon @MRCET-state level</h5>
+                </div>
+            </div>
+            
+            <!-- Address Section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="address-card animate-slide-up delay-1">
+                        <h4 class="h5"><i class="fas fa-home me-2" style="color: var(--icon-color);"></i> Address</h4>
+                        <p class="mb-0">4-4-11 Sherpura, Siddipet, Telangana, India - 502103</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Experience</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="experience-card animate-slide-up">
+                        <h4 class="h5"><i class="fas fa-briefcase me-2" style="color: var(--icon-color);"></i> Salesforce Virtual Internship</h4>
+                        <p class="mb-1"><strong>Developer Completion (8 weeks)</strong></p>
+                        <p class="small text-muted mb-2">Completed intensive training in Salesforce development</p>
+                        <ul class="small">
+                            <li>Gained hands-on experience with Salesforce platform</li>
+                            <li>Developed custom applications using Apex and Visualforce</li>
+                            <li>Implemented Salesforce Lightning components</li>
+                            <li>Completed real-world development projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Skills</h2>
+            
+            <div class="row g-3">
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up">
+                        <h4 class="h6"><i class="fas fa-code me-1" style="color: var(--icon-color);"></i> Programming</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-python-plain skill-icon"></i> Python</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-java-plain skill-icon"></i> Java</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up delay-1">
+                        <h4 class="h6"><i class="fas fa-laptop-code me-1" style="color: var(--icon-color);"></i> Web Development</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-html5-plain skill-icon"></i> HTML</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-css3-plain skill-icon"></i> CSS</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-javascript-plain skill-icon"></i> JavaScript</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-bootstrap-plain skill-icon"></i> Bootstrap</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-code skill-icon"></i> XML</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up delay-2">
+                        <h4 class="h6"><i class="fas fa-database me-1" style="color: var(--icon-color);"></i> Databases</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-mysql-plain skill-icon"></i> MySQL</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="bi bi-microsoft skill-icon"></i> Micro Services</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up">
+                        <h4 class="h6"><i class="fas fa-cloud me-1" style="color: var(--icon-color);"></i> Cloud & DevOps</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-amazonwebservices-plain skill-icon"></i> AWS</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="devicon-docker-plain skill-icon"></i> DevOps</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up delay-1">
+                        <h4 class="h6"><i class="fas fa-language me-1" style="color: var(--icon-color);"></i> Languages</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-language skill-icon"></i> English</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-language skill-icon"></i> Hindi</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-language skill-icon"></i> Telugu</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="skill-card animate-slide-up delay-2">
+                        <h4 class="h6"><i class="fas fa-heart me-1" style="color: var(--icon-color);"></i> Interests</h4>
+                        <ul class="list-unstyled small mb-0">
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-running skill-icon"></i> Sports</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-laptop-code skill-icon"></i> Programming</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-search skill-icon"></i> Research</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-globe skill-icon"></i> Web Searching</li>
+                            <li><i class="fas fa-check text-success me-1"></i> <i class="fas fa-gamepad skill-icon"></i> Online Games</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Projects</h2>
+            
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-user-graduate project-icon"></i>
+                            <h4 class="h5 mb-0">Student Leave Request (Web Application)</h4>
+                        </div>
+                        <p class="small mb-2">The Student Leave Request Web Application is a simple yet effective system that allows students to submit leave requests online.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript, (PHP/Python/Node.js)</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-right">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-paint-brush project-icon"></i>
+                            <h4 class="h5 mb-0">Air Canvas</h4>
+                        </div>
+                        <p class="small mb-2">Python-based application that allows users to draw in the air using hand gestures with computer vision techniques.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> Python, Computer Vision, Image Processing</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left delay-1">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-heartbeat project-icon"></i>
+                            <h4 class="h5 mb-0">Heart Disease Prediction Using ML</h4>
+                        </div>
+                        <p class="small mb-2">Uses machine learning algorithms to predict the likelihood of heart disease based on medical history.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> Python, Machine Learning</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-right delay-1">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-road project-icon"></i>
+                            <h4 class="h5 mb-0">Road Surface Anomaly Detection</h4>
+                        </div>
+                        <p class="small mb-2">Solution for automating road condition monitoring using deep learning techniques.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> Python, Deep Learning, CNNs, YOLO</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left delay-2">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-eye project-icon"></i>
+                            <h4 class="h5 mb-0">Vision Tutor</h4>
+                        </div>
+                        <p class="small mb-2">Educational or computer vision related project (details to be added).</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- New Projects Added Below -->
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-right delay-2">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-laptop-code project-icon"></i>
+                            <h4 class="h5 mb-0">Portfolio Website</h4>
+                        </div>
+                        <p class="small mb-2">A personal portfolio built using HTML, CSS, and Bootstrap. Showcases my bio, skills, certifications, experience, education, and contact information.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, Bootstrap</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-cloud-sun project-icon"></i>
+                            <h4 class="h5 mb-0">Weather App</h4>
+                        </div>
+                        <p class="small mb-2">A weather forecasting app that uses the OpenWeather API to display current weather, temperature, humidity, and condition icons based on user's city input.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript, API Integration</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-right delay-1">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-shopping-cart project-icon"></i>
+                            <h4 class="h5 mb-0">E-Commerce Website</h4>
+                        </div>
+                        <p class="small mb-2">An e-commerce frontend with product catalog, shopping cart, item quantity updates, and subtotal calculation. Designed with clean visuals and basic interaction logic.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left delay-2">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-robot project-icon"></i>
+                            <h4 class="h5 mb-0">Vikky's AI</h4>
+                        </div>
+                        <p class="small mb-2">An interactive chatbot UI powered by the Gemini API. Generates humorous and conversational responses with animations that mimic a real-time chat experience.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript, Gemini API</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-right">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-calculator project-icon"></i>
+                            <h4 class="h5 mb-0">Basic Calculator</h4>
+                        </div>
+                        <p class="small mb-2">A calculator web app for performing basic arithmetic operations like addition, subtraction, multiplication, and division with keyboard support.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card bg-white shadow-sm animate-slide-left delay-1">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-gamepad project-icon"></i>
+                            <h4 class="h5 mb-0">JavaScript Games Collection</h4>
+                        </div>
+                        <p class="small mb-2">A collection of mini JavaScript games including Number Guessing Game, Tic Tac Toe, and a Random Color Changer.</p>
+                        <p class="small text-muted"><strong>Technologies:</strong> JavaScript, DOM Manipulation</p>
+                        <a href="https://github.com/Vivekananda004" class="btn btn-sm btn-outline-primary" target="_blank">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Contact Me</h2>
+            
+            <div class="row g-3">
+                <div class="col-lg-6">
+                    <div class="card shadow-sm h-100 animate-slide-left">
+                        <div class="card-body">
+                            <h4 class="card-title h5 mb-3">Get in Touch</h4>
+                            <ul class="list-unstyled small">
+                                <li class="mb-2">
+                                    <i class="fas fa-envelope contact-icon"></i>
+                                    <a href="mailto:vikkyitha143@gmail.com">vikkyitha143@gmail.com</a>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-phone contact-icon"></i>
+                                    <a href="tel:+919032885600">+91 9032885600</a>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-home contact-icon"></i>
+                                    4-4-11 Sherpura, Siddipet, Telangana, India - 502103
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fab fa-linkedin contact-icon"></i>
+                                    <a href="https://linkedin.com/in/vivekananda-itha-38176b225" target="_blank">linkedin.com/in/vivekananda-itha</a>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-3">
+                                <h5 class="h6">Connect with me</h5>
+                                <div class="d-flex mt-2">
+                                    <a href="https://linkedin.com/in/vivekananda-itha-38176b225" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://github.com/Vivekananda004" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow-sm h-100 animate-slide-right">
+                        <div class="card-body">
+                            <h4 class="card-title h5 mb-3">Send a Message</h4>
+                            <form action="https://formsubmit.co/vikkyitha143@gmail.com" method="POST">
+                                <input type="hidden" name="_subject" value="New contact from portfolio">
+                                <div class="mb-2">
+                                    <input type="text" name="name" class="form-control form-control-sm" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-2">
+                                    <input type="email" name="email" class="form-control form-control-sm" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-2">
+                                    <input type="text" name="_subject" class="form-control form-control-sm" placeholder="Subject" required>
+                                </div>
+                                <div class="mb-2">
+                                    <textarea name="message" class="form-control form-control-sm" rows="4" placeholder="Your Message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center small">
+        <div class="container">
+            <p class="mb-0">© 2025 ITHA Vivekananda. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Simple animation on scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll event
+            function handleScroll() {
+                animateElements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
+        });
+    </script>
+</body>
+</html>
