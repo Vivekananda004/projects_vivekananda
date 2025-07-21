@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chota AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #444;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #main-container {
+      display: flex;
+      width: 98%;
+      height: 98vh;
+      border: 3px solid white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #history {
+      width: 220px;
+      background-color: #333;
+      padding: 15px;
+      border-right: 2px solid white;
+      overflow-y: auto;
+    }
+
+    #history h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    #history-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #history-list li {
+      margin: 8px 0;
+      font-size: 0.9rem;
+      word-wrap: break-word;
+      border-bottom: 1px dashed #666;
+      padding-bottom: 4px;
+    }
+
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #444;
+      padding: 0 15px;
+      height: 100%;
+    }
+
+    header {
+      text-align: center;
+      padding: 15px 0;
+      border-bottom: 2px solid white;
+    }
+
+    #main-heading {
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    #content {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    #convs p {
+      margin-bottom: 10px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    #input-area {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 2px solid white;
+    }
+
+    #inp {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #555;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      min-height: 50px;
+      resize: none;
+      overflow-y: hidden;
+      line-height: 1.4;
+    }
+
+    #inp::placeholder {
+      color: #ccc;
+    }
+
+    #askBtn {
+      background-color: #aaa;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      height: fit-content;
+    }
+
+    #askBtn:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      background-color: #111;
+      color: #ccc;
+      border-top: 1px solid #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      #main-container {
+        flex-direction: column;
+      }
+
+      #history {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid white;
+      }
+
+      #input-area {
+        flex-direction: column;
+      }
+
+      #askBtn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main-container">
+    <aside id="history">
+      <h2>🔍 Recent</h2>
+      <ul id="history-list"></ul>
+    </aside>
+
+    <div id="main">
+      <header>
+        <h1 id="main-heading"> Chota AI 🤖</h1>
+      </header>
+
+      <section id="content">
+        <div id="convs"></div>
+      </section>
+
+      <section id="input-area">
+        <textarea id="inp" placeholder="Ask something funny..."></textarea>
+        <button id="askBtn">Ask</button>
+      </section>
+
+      <footer>
+        <!-- <div>📞 Contact: vivekananda@gmail.com | 📱 +91 9876543210</div> -->
+        <div>© Vivekananda 2025</div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('inp');
+    const btn = document.getElementById('askBtn');
+    const convsDiv = document.getElementById('convs');
+    const historyList = document.getElementById('history-list');
+    let convs = [];
+
+    // Auto-expand textarea
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+    });
+
+    btn.addEventListener('click', () => {
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCYlK_K7PUuNoVfLOlgpt16BwBEBbQW5XU`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text:
+                      "You are a sarcastic and funny assistant. Always give wrong and humorous answers with easy words. Question: " +
+                      userText,
+                  },
+                ],
+              },
+            ],
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const answer = data.candidates[0]?.content?.parts[0]?.text || "Oops! Try again.";
+          const obj = { myQue: userText, AIresponse: answer };
+          convs.push(obj);
+          displayData(convs);
+          updateHistory(userText);
+        })
+        .catch((err) => console.error(err));
+    });
+
+    function displayData(arr) {
+      convsDiv.innerHTML = '';
+      arr.forEach((e) => {
+        const q = document.createElement('p');
+        q.textContent = "🧑‍💻 You: " + e.myQue;
+        const a = document.createElement('p');
+        a.textContent = "🤖 Chota AI: " + e.AIresponse;
+        convsDiv.append(q, a);
+      });
+      input.value = '';
+      input.style.height = 'auto';
+    }
+
+    function updateHistory(question) {
+      const li = document.createElement('li');
+      li.textContent = question;
+      historyList.prepend(li);
+    }
+  </script>
+</body>
+</html>
