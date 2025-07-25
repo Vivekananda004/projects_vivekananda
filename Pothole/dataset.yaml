@@ -1,0 +1,7 @@
+path: /content/drive/MyDrive/Pothole/pothole_dataset_v8/
+train: /content/drive/MyDrive/Pothole/pothole_dataset_v8/train/images
+val: /content/drive/MyDrive/Pothole/pothole_dataset_v8/valid/images
+
+# Classes
+names:
+  0: 'Pothole'
